@@ -1,6 +1,6 @@
 {
   "name": "fluent-downloader",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Multi Threaded Downloader",
   "repository": {
     "type": "git",
@@ -43,7 +43,7 @@
     }
   },
   "bin": {
-    "fdl": "./bin/cli.cjs"
+    "fdl": "./bin/cli.mjs"
   },
   "cliName": "fdl",
   "scripts": {
