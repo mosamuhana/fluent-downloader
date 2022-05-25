@@ -1,6 +1,6 @@
 {
   "name": "fluent-downloader",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Multi Threaded Downloader",
   "repository": {
     "type": "git",
@@ -42,7 +42,9 @@
 			}
 		}
 	},
-	"bin": "./bin/cli.js",
+	"bin": {
+    "fdl": "./bin/cli.js"
+  },
 	"cliName": "fdl",
   "scripts": {
     "prebuild": "rimraf -rf ./dist",
