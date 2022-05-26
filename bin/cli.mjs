@@ -2,28 +2,29 @@
 
 import { resolve, parse } from 'path';
 import { tmpdir } from 'os';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync } from 'fs';
 import { readFile } from 'fs/promises';
+import { fileURLToPath } from 'url';
+import chalk from 'chalk';
 import { program } from 'commander';
 import { ProgressBar } from '@devteks/progress';
 import { hideCursor } from '@devteks/cursor';
-import { green, cyan, yellow, magenta, blue } from 'chalk';
 
-import { Downloader } from '../';
+import { Downloader } from '../dist/index.mjs';
 
-const pkg = require('../package.json');
+const pkg = JSON.parse(readFileSync(fileURLToPath(new URL('../package.json', import.meta.url)), 'utf8'));
 
 const KB = 1024;
 const UNITS = ' KMGTPEZYXWVU';
 const BAR_INFO = [
 	' {bar} ',
-	green('{percent}'),
+	chalk.green('{percent}'),
 	' [ ',
-	cyan('{current}'),
+	chalk.cyan('{current}'),
 	' / ',
-	blue('{total}'),
+	chalk.blue('{total}'),
 	' ] ',
-	magenta('{speed}'),
+	chalk.magenta('{speed}'),
 ].join('');
 
 function fmtSize(value, precision = 0) {
@@ -105,7 +106,7 @@ async function initProgress(downloader) {
 
 	downloader.on('total', ({ url, size }) => {
 		bars[url] = new ProgressBar({
-			format: yellow(limitUrlString(url, 40)) + BAR_INFO,
+			format: chalk.yellow(limitUrlString(url, 40)) + BAR_INFO,
 			total: size,
 			current: 0,
 			line: barCount++,

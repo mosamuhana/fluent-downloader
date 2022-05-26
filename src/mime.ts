@@ -1,7 +1,9 @@
+import mimeDb from 'mime-db';
+
 const EXTRACT_TYPE_REGEXP = /^\s*([^;\s]*)(?:;|\s|$)/;
 
 function getAllExtensions() {
-	const mimeDb: Record<string, any> = require('mime-db');
+	//const mimeDb: Record<string, any> = require('mime-db');
 	const map: Record<string, string[]> = {};
 	Object.entries(mimeDb).forEach(([type, mime]) => {
 		const exts = mime.extensions;

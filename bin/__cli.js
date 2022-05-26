@@ -7,8 +7,10 @@ const { readFile } = require('fs/promises');
 const { program } = require('commander');
 const { ProgressBar } = require('@devteks/progress');
 const { hideCursor } = require('@devteks/cursor');
-const { green, cyan, yellow, magenta, blue } = require('chalk');
+//const { green, cyan, yellow, magenta, blue } = require('chalk');
+const chalk = require('chalk');
 
+//const { Downloader } = require('../dist/index.js');
 const { Downloader } = require('../');
 
 const pkg = require('../package.json');
@@ -17,13 +19,13 @@ const KB = 1024;
 const UNITS = ' KMGTPEZYXWVU';
 const BAR_INFO = [
 	' {bar} ',
-	green('{percent}'),
+	chalk.green('{percent}'),
 	' [ ',
-	cyan('{current}'),
+	chalk.cyan('{current}'),
 	' / ',
-	blue('{total}'),
+	chalk.blue('{total}'),
 	' ] ',
-	magenta('{speed}'),
+	chalk.magenta('{speed}'),
 ].join('');
 
 function fmtSize(value, precision = 0) {
@@ -105,7 +107,7 @@ async function initProgress(downloader) {
 
 	downloader.on('total', ({ url, size }) => {
 		bars[url] = new ProgressBar({
-			format: yellow(limitUrlString(url, 40)) + BAR_INFO,
+			format: chalk.yellow(limitUrlString(url, 40)) + BAR_INFO,
 			total: size,
 			current: 0,
 			line: barCount++,

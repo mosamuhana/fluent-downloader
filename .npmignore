@@ -7,3 +7,4 @@ rollup.config.js
 .eslintrc.yml
 .eslintrc.yml
 test
+bin/__cli.js
